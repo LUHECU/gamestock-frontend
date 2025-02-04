@@ -1,0 +1,35 @@
+<body  class="d-flex flex-column h-100">
+    
+    <main class="flex-shrink-0">
+        <div class="album py-3 bg-body-tertiary ">
+
+            <div class="container py-1 mb-3">
+                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="newGame()"><i class="fa fa-save"></i>&nbsp; New game</button>
+            </div>
+
+            <div class="container">
+
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+                    <div *ngFor="let game of listGames" class="col">
+                        <div *ngIf="game.status" class="card shadow-sm">
+                            <img class="bd-placeholder-img card-img-top" width="100%" height="245" [src]="game.image">
+                            <div class="card-body">
+                                <h5>{{game.name}}</h5>
+                                <p class="card-text">{{game.description}}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="editGame(game.id)">Edit</button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary" (click)="removeGame(game.id)">Remove</button>
+                                    </div>
+                                    <small class="text-body-secondary">{{game.storage}}.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <app-gameform isUpdateModal="{{isUpdate}}" idGame="{{idGame}}" isGameRemove="{{isGameRemove}}"></app-gameform>
+    
+</body>

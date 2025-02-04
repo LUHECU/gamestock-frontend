@@ -1,0 +1,53 @@
+<div class="modal fade" id="exampleModal" tabindex="1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 *ngIf="!modalAction()" class="modal-title fs-5">New game</h1>
+                <h1 *ngIf="modalAction()" class="modal-title fs-5">Edit game</h1>
+                <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            
+            <div class="modal-body">
+                    <form [formGroup]="formGame">
+
+                        <input type="hidden" formControlName="id">
+
+                        <div class="mb-3 row">
+                            <label class="col-sm-2 col-form-label">Name</label>
+                            <div>
+                                <input type="text" class="form-control btn-sm" formControlName="name">
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label class="col-sm-2 col-form-label" for="description">Description</label>
+                            <div>
+                                <input type="text" class="form-control btn-sm" formControlName="description" id="description" name="description">
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label class="col-sm-2 col-form-label">Storage</label>
+                            <div>
+                                <input type="text" class="form-control btn-sm" formControlName="storage">
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label class="col-sm-2 col-form-label">Image</label>
+                            <div>
+                                <input type="text" class="form-control btn-sm" formControlName="image">
+                            </div>
+                        </div>
+
+                    </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secundary btn-sm" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-success btn-sm" data-bs-dismiss="modal"*ngIf="!modalAction()" (click)="saveGame()">Save</button>
+                <button type="button" class="btn btn-success btn-sm" data-bs-dismiss="modal" *ngIf="modalAction()" (click)="updateGame()">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
