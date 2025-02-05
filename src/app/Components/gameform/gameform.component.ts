@@ -1,9 +1,10 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, inject, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { GameService } from '../../services/game.service';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { GameModel } from '../../models/game.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-gameform',
@@ -15,6 +16,7 @@ export class GameformComponent implements OnInit, OnChanges{
   @Input() isUpdateModal: string = 'false';
   @Input() isGameRemove: string = 'false';
   @Input() idGame: string = "";
+  private router = inject(Router);
   Game: GameModel = new GameModel ;
   formGame: FormGroup = new FormGroup({});
 
@@ -29,18 +31,28 @@ export class GameformComponent implements OnInit, OnChanges{
       });
   }
   ngOnChanges(changes: SimpleChanges): void {
-    if(this.isUpdateModal === 'false'){
+    if(!this.modalAction()){
       this.formGame.reset();
     }
-    if (changes['idGame'] && this.isUpdateModal === 'true') {
+    if (changes['idGame'] && this.modalAction()) {
       this.editGame();
     }
-    else if(changes['idGame'] && this.isGameRemove === 'true'){
+    else if(changes['idGame'] && this.modalAction()){
       this.RemoveGame(+this.idGame);
     }
   }
   ngOnInit(): void {
   }
+
+  reloadComponent(){
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/',{
+      skipLocationChange: true,
+    }).then(()=> {
+      this.router.navigate([currentUrl]);
+    })
+  }
+
 
   editGame(){
     if(this.modalAction()){
@@ -80,18 +92,20 @@ export class GameformComponent implements OnInit, OnChanges{
     this.formGame.controls['status'].setValue(true);
 
     this.gameService.saveGame(this.formGame.value).subscribe({
-      complete: () => {
-        this.toastr.success('', 'Game add', {
+      next: (data) => {
+        this.toastr.success(data.message, 'Game add', {
           timeOut: 3000, positionClass: 'toast-top-center'
         });
         this.formGame.reset();
+        this.reloadComponent();
       },
       error: (err) => {
         this.toastr.error(err.error.message, 'Fail', {
           timeOut: 3000,  positionClass: 'toast-top-center',
         });
+        this.formGame.reset();
+        this.reloadComponent();
       }
-
     })
 
   }
@@ -102,17 +116,17 @@ export class GameformComponent implements OnInit, OnChanges{
     const id =+this.formGame.get('id')?.value;
 
     this.gameService.updateGame(id, this.formGame.value).subscribe({
-      complete: () => {
-        this.toastr.success('', 'Game updated', {
+      next: (data) => {
+        this.toastr.success(data.message, 'Game updated', {
           timeOut: 3000, positionClass: 'toast-top-center'
         });
-        this.formGame.reset();
+        this.reloadComponent();
       },
       error: (err) => {
         this.toastr.error(err.error.message, 'Fail', {
           timeOut: 3000,  positionClass: 'toast-top-center',
         });
-        this.formGame.reset();
+        this.reloadComponent();
       }
 
     })
@@ -121,17 +135,17 @@ export class GameformComponent implements OnInit, OnChanges{
 
   RemoveGame(id: number): void{
     this.gameService.removeGame(id).subscribe({
-      complete: () => {
-        this.toastr.success('', 'Game Removed', {
+      next: (data) => {
+        this.toastr.success(data.message, 'Game Removed', {
           timeOut: 3000, positionClass: 'toast-top-center'
         });
-        this.formGame.reset();
+        this.reloadComponent();
       },
       error: (err) => {
         this.toastr.error(err.error.message, 'Fail', {
           timeOut: 3000,  positionClass: 'toast-top-center',
         });
-        this.formGame.reset();
+        this.reloadComponent();
       }
 
     })

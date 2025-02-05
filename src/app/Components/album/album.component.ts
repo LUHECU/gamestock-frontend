@@ -19,8 +19,7 @@ export class AlbumComponent implements OnInit{
   listGames: GameModel[] = [];
   idGame: string = "";
 
-  constructor(private gameService : GameService, private toastr : ToastrService){
-  }
+  constructor(private gameService : GameService, private toastr : ToastrService){}
   
   ngOnInit(): void {
     this.list();
