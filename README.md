@@ -1,59 +1,55 @@
-# GamestockFrontend
+# GameStock Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.4.
+GameStock is a web application that allows users to browse and manage a video game catalog.  
+This repository contains the frontend client built with Angular.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- Browse video game catalog
+- View game details
+- Create, update, and delete games
+- Responsive UI for catalog navigation
+- Integration with REST APIs
 
-```bash
-ng serve
-```
+## Tech Stack
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- Angular
+- TypeScript
+- HTML / CSS
+- REST API integration
 
-## Code scaffolding
+## Architecture Overview
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+The frontend follows a component-based architecture where each UI element is modular and reusable.
 
-```bash
-ng generate component component-name
-```
+Key components include:
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+- Game List Component – Displays the catalog of games
+- Game Detail Component – Shows detailed information about a selected game
+- Game Form Component – Allows creating and editing game entries
+- API Service – Handles communication with the backend REST API
 
-```bash
-ng generate --help
-```
+## Installation
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Clone the repository:
 
 ```bash
-ng test
+git clone https://github.com/yourusername/gamestock-frontend
+cd gamestock-frontend
+
+Install dependencies: npm install
+
+Run the development server: ng serve
+
+The application will run at: http://localhost:4200
+
 ```
 
-## Running end-to-end tests
+#Screenshots
+<img width="1913" height="942" alt="image" src="https://github.com/user-attachments/assets/9ee152db-cf51-4dcf-a8a9-bc8e6d626666" />
 
-For end-to-end (e2e) testing, run:
 
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+#Future Improvements
+- Add search and filtering capabilities
+- Improve UI/UX for catalog navigation
+- Implement authentication
