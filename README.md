@@ -45,11 +45,11 @@ The application will run at: http://localhost:4200
 
 ```
 
-#Screenshots
+##Screenshots
 <img width="1913" height="942" alt="image" src="https://github.com/user-attachments/assets/9ee152db-cf51-4dcf-a8a9-bc8e6d626666" />
 
 
-#Future Improvements
+##Future Improvements
 - Add search and filtering capabilities
 - Improve UI/UX for catalog navigation
 - Implement authentication
